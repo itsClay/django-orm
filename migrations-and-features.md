@@ -1,6 +1,30 @@
 Django - Features and Overview
 ==============================
 
+First, let's finish off our Blog model. Let's insert the one to many field into the <code>models.py</code>
+
+````Python
+class Post(models.Model):
+    title = models.CharField(max_length=120)
+    body = models.TextField()
+    author = models.ForeignKey(Author)
+
+    def __unicode__(self):
+        return u"{}".format(self.title)
+````
+
+Now let's insert the many to many relationship into the same file.
+
+````Python
+class Tag(models.Model):
+    name = models.CharField(max_length=20)
+    posts = models.ManyToManyField(Post)
+
+    def __unicode__(self):
+        return u"{}".format(self.name)
+````
+
+
 ##Django Admin Site
 One of Django's more powerful features is that it comes with a built-in option for an automatic admin interface. This admin gives you a visual output of your database models, allowing you to more easily see relationships and to create new records.
 
